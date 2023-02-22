@@ -1,26 +1,43 @@
 const express = require('express');
-const mongoose = require('./conn/config');
-const customer_router = require('./route/customer');
-const order_router = require('./route/order');
-const product_router = require('./route/product');
+const mongoose = require('./Config/config');
+const customer_create_router = require('./Routes/Customer_info/createCustomer');
+const customer_read_router = require('./Routes/Customer_info/readCustomer');
+const customer_update_router = require('./Routes/Customer_info/updateCustomer');
+const customer_delete_router = require('./Routes/Customer_info/deleteCustomer');
+
+const product_create_router = require('./Routes/Product_info/createProduct');
+const product_read_router = require('./Routes/Product_info/readProduct');
+const product_update_router = require('./Routes/Product_info/updateProduct');
+const product_delete_router = require('./Routes/Product_info/deleteProduct');
+
+const many_customers_router = require('./Routes/manyCustomer');
+
+const pagination_router = require('./Routes/pagination');
+
+const order_router = require('./Routes/createOrder');
+const payment_router = require('./Routes/createPayment');
 const port = process.env.PORT || 3000;
 
 
 const app = express();
 app.use(express.json());
-app.use('/customer', customer_router);
-app.use('/order', order_router);
-app.use('/product', product_router);
+
+app.use('/customer/create', customer_create_router);
+app.use('/customer/read', customer_read_router);
+app.use('/customer/update', customer_update_router);
+app.use('/customer/delete', customer_delete_router);
+
+app.use('/product/create', product_create_router);
+app.use('/product/read', product_read_router);
+app.use('/product/update', product_update_router);
+app.use('/product/delete', product_delete_router);
+
+app.use('/manyCustomer', many_customers_router);
+
+app.use('/customer/pagination', pagination_router);
+
+app.use('/order/create', order_router);
+app.use('/payment/create', payment_router);
 
 
 app.listen(port, () => console.log(`Server is running on ${port}........ `))
-
-
-
-
-
-
-
-
-
-

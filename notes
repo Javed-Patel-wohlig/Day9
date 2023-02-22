@@ -1,0 +1,35 @@
+{
+    "users":[
+        {
+            "name": "javedpatel",
+            "phone": 9134587961,
+            "email": "osamapate@gmail.com",
+            "dob": "29-7-2000",
+            "password": "1012154And",
+            "address": "sakinaka"
+        },
+        {
+            "name": "javedpatel",
+            "phone": 9134587961,
+            "email": "javed1@gmail.com",
+            "dob": "29-7-2000",
+            "password": "1012154And",
+            "address": "sakinaka"
+        },
+        {
+            "name": "javedpatel",
+            "phone": 9134587961,
+            "email": "javed2@gmail.com",
+            "dob": "29-7-2000",
+            "password": "1012154And",
+            "address": "sakinaka"
+        },
+        {
+            "name": "javedpatel",
+            "phone": 9134587961,
+            "email": "javed3@gmail.com",
+            "dob": "29-7-2000",
+            "password": "1012154And",
+            "address": "sakinaka"
+        }]
+}
