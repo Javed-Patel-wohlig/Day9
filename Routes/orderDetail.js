@@ -6,7 +6,7 @@ const router = require("express").Router();
 router.get('/', async(req, res) => {
 try{
 Order.findOne({ payId: '1' })
-  .populate('product').populate('customer')
+  .populate('product customer')
   .exec((err, result) => {
     if (err) {
       console.log(err);
