@@ -3,10 +3,13 @@ const customer = require("./customerSchema");
 const product = require("./productSchemas");
 
 const orderSchema = new mongoose.Schema({
-  Product:{type: mongoose.Schema.Types.ObjectId, ref: "Product"},
+  product:{type: mongoose.Schema.Types.ObjectId, ref: "Product"},
   
   customer: {type: mongoose.Schema.Types.ObjectId, ref: "Customer"},
-  payid:{
+  productId:{type: String, required: true},
+  customerId: {type: String, required: true},
+  product: {type: String, required: true},
+  payId:{
       type: String,
       required:true
   },
