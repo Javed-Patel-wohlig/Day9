@@ -1,25 +1,33 @@
 const Order = require("../Models/orderSchemas");
+const Payment = require("../Models/paymentSchemas");
+const _ = require("lodash");
 
 orderHandler = async (req, res) => {
   try {
-    let name = req.body.payId;
-    const existingOrder = await Order.findOne({ payId: name });
+    // let name = req.body.id;
+    // const existingOrder = await Order.findOne({ _id: name });
 
-    if (existingOrder && existingOrder.product === req.body.product) {
-      const newQuantity =
-        Number(existingOrder.quantity) + Number(req.body.quantity);
-      await Order.findOneAndUpdate(
-        { payId: name },
-        { quantity: newQuantity, o_date_time: Date.now() }
-      );
-      const updatedOrderDetails = await Order.findOne({ payId: name });
-      return res
-        .status(200)
-        .json({
-          updatedOrderDetails,
-          message: `Quantity updated to ${newQuantity}`,
-        });
-    }
+    // console.log(existingOrder);
+
+    // if (existingOrder.pay === req.body.pay) {
+    //   const newQuantity =
+    //     Number(existingOrder.quantity) + Number(req.body.quantity);
+    //   await Order.findOneAndUpdate({ _id: name }, { quantity: newQuantity });
+
+    //   const payment = await Payment.findOne(existingOrder.pay);
+    //   if (payment.pay_status === true) {
+    //     await Order.findOneAndUpdate(
+    //       { _id: name },
+    //       { o_date_time: Date.now() }
+    //     );
+    //   }
+
+    //   const updatedOrderDetails = await Order.findOne({ _id: name });
+    //   return res.status(200).json({
+    //     updatedOrderDetails,
+    //     message: `Quantity updated to ${newQuantity}`,
+    //   });
+    // }
 
     let one = Number(req.body.amount);
     let two = Number(req.body.tax);
@@ -27,9 +35,21 @@ orderHandler = async (req, res) => {
 
     req.body.total = Number(total);
 
-    let order = new Order(req.body);
+    let order = new Order(_.pick(req.body, ["customer", "product", "o_date_time","deliveryStatus","quantity","colors","size","amount","tax","total"]));
+    let payment = new Payment(_.pick(req.body, ["amount","pay_type","pay_status","customer","o_date_time","tax","total"]));
+
+    payment = await payment.save();
     order = await order.save();
-    res.send(order);
+
+    payment.order = order._id;
+    order.pay = payment._id;
+
+    payment = await payment.save();
+    order = await order.save();
+    
+    console.log(order, payment);
+    res.status(200).send(order, payment);
+    
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

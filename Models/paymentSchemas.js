@@ -17,7 +17,7 @@ const paymentSchema = new mongoose.Schema({
         default: false,
         required: true,
     },
-    Order:{type: mongoose.Schema.Types.ObjectId, ref: "Order"},
+    order:{type: mongoose.Schema.Types.ObjectId, ref: "Order"},
    
     customer:{type: mongoose.Schema.Types.ObjectId, ref: "Customer"},
    
