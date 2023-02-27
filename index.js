@@ -20,7 +20,8 @@ const payment_router = require("./Routes/createPayment");
 // const pagination_customer_keyword = require("./Controller/pagination_customer_keyword");
 const Order_detail_router = require("./Routes/orderDetail");
 const Payment_detail_router = require("./Routes/paymentDetail");
-// const recursive1 = require("./Routes/recursive1");
+const recursive1_router = require("./Routes/recursive1");
+const recursive2_router = require("./Routes/recursive2");
 
 const port = process.env.PORT || 3000;
 
@@ -41,11 +42,12 @@ app.use("/manyCustomer", many_customers_router);
 
 app.use("/customer/pagination", pagination_router);
 
-app.use("/order/detail", Order_detail_router);
-
-app.use("/payment/detail", Order_detail_router);
+app.use("/recursive1", recursive1_router);
+app.use("/recursive2", recursive2_router);
 
 app.use("/order/create", order_router);
+app.use("/order/detail", Order_detail_router);
 app.use("/payment/create", payment_router);
+app.use("/payment/detail", Order_detail_router);
 
 app.listen(port, () => console.log(`Server is running on ${port}........ `));

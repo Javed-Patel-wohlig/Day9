@@ -6,14 +6,16 @@ const router = require("express").Router();
 router.post('/',async (req,res)=>{
   try {
     var CHUNK = 200;
+    const myModelData = await myModel.find()
+    let bulk = _.chunk(myModelData, CHUNK);
+    console.log(bulk.length)
     const recursiveInsert = async (start) => {
-      const myModelData = await myModel.find().skip(start).limit(CHUNK);
 
       if (myModelData.length === 0) {
         return;
       }
 
-      const bulk = myModelData.map((item) => {
+        const result = bulk.map((item) => {
         return {
           insertOne:{
             document:{
@@ -28,7 +30,7 @@ router.post('/',async (req,res)=>{
         }
       });
 
-      myModel2.bulkWrite(bulk);
+      myModel2.bulkWrite(result);
       console.log(`Inserted ${myModelData.length} records`);
       await recursiveInsert(start + CHUNK);
     };

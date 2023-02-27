@@ -1,6 +1,6 @@
 const mongoose  = require('mongoose');
-const customer = require('./customerSchema');
-const order = require('./orderSchemas');
+const Customer = require('./customerSchema');
+const Order = require('./orderSchemas');
 
 
 const paymentSchema = new mongoose.Schema({
@@ -17,9 +17,9 @@ const paymentSchema = new mongoose.Schema({
         default: false,
         required: true,
     },
-    order:{type: mongoose.Schema.Types.ObjectId, ref: "Order"},
+    order:{type: mongoose.Schema.Types.ObjectId, ref: Order},
    
-    customer:{type: mongoose.Schema.Types.ObjectId, ref: "Customer"},
+    customer:{type: mongoose.Schema.Types.ObjectId, ref: Customer},
    
     pay_date_time:{
         type: Date,

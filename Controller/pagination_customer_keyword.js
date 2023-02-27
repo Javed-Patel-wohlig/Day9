@@ -22,6 +22,6 @@ const searchCustomers = async (keyword, pageNumber, pageSize) => {
   };
 };
 
-searchCustomers("osa", 1, 10)
+searchCustomers("", 3, 10)
   .then((result) => console.log(result))
   .catch((error) => console.log(error));

@@ -48,7 +48,7 @@ orderHandler = async (req, res) => {
     order = await order.save();
     
     console.log(order, payment);
-    res.status(200).send(order, payment);
+    res.send({ order, payment });
     
   } catch (err) {
     res.status(500).json({ message: err.message });

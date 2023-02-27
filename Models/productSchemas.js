@@ -28,9 +28,6 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  product: {
-    type: mongoose.Schema.Types.ObjectId, ref: "Product",
-  },
   categories : {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Categories",
